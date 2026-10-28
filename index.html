@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="sl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RD Škofljica – rokometno društvo</title>
+<meta name="description" content="Rokometno društvo Škofljica: urnik treningov, selekcije, vpis novih članov, tekme in kontakt.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ===== KLUBSKE BARVE: spremeni tukaj ===== */
+  :root{
+    --primarna:#0b5d3b;      /* glavna barva kluba */
+    --poudarek:#f2b705;      /* poudarek (gumbi, črte) */
+    --temna:#12201a;
+    --svetla:#f6f7f5;
+    --besedilo:#1d2421;
+    --siva:#5c6662;
+    --rob:#dde2df;
+    --belo:#ffffff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:Inter,system-ui,sans-serif;color:var(--besedilo);background:var(--svetla);line-height:1.6}
+  a{color:var(--primarna)}
+  h1,h2,h3{font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.02em;line-height:1.1}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 16px}
+  .todo{background:#fff3c4;border-bottom:2px dashed #d9a400;padding:0 3px}
+
+  /* Navigacija */
+  header{position:sticky;top:0;z-index:10;background:var(--temna);color:#fff}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:60px}
+  .logo{font-family:"Barlow Condensed",sans-serif;font-weight:800;font-size:1.5rem;color:#fff;text-decoration:none}
+  .logo span{color:var(--poudarek)}
+  .nav ul{display:flex;gap:22px;list-style:none}
+  .nav ul a{color:#dfe7e3;text-decoration:none;font-size:.95rem;font-weight:500}
+  .nav ul a:hover{color:var(--poudarek)}
+  #menu-btn{display:none;background:none;border:0;color:#fff;font-size:1.6rem;cursor:pointer}
+
+  /* Uvod */
+  .hero{background:linear-gradient(135deg,var(--primarna),var(--temna));color:#fff;padding:90px 0 80px}
+  .hero h1{font-size:clamp(2.6rem,7vw,4.6rem);font-weight:800}
+  .hero h1 span{color:var(--poudarek)}
+  .hero p{max-width:560px;margin:18px 0 30px;font-size:1.1rem;color:#d6e4dc}
+  .btn{display:inline-block;padding:13px 26px;border-radius:6px;font-weight:600;text-decoration:none;margin:0 10px 10px 0}
+  .btn-glavni{background:var(--poudarek);color:var(--temna)}
+  .btn-obroba{border:2px solid #fff;color:#fff}
+  .hitro{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:46px}
+  .hitro div{background:rgba(255,255,255,.08);border-left:3px solid var(--poudarek);padding:14px 16px;border-radius:4px}
+  .hitro b{display:block;font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--poudarek)}
+
+  /* Razdelki */
+  section{padding:70px 0}
+  section:nth-of-type(even){background:var(--belo)}
+  h2{font-size:2.3rem;margin-bottom:8px}
+  h2::after{content:"";display:block;width:54px;height:4px;background:var(--poudarek);margin-top:8px}
+  .uvod{color:var(--siva);max-width:680px;margin:14px 0 30px}
+  .mreza{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+  .kartica{background:var(--belo);border:1px solid var(--rob);border-radius:8px;padding:22px}
+  section:nth-of-type(even) .kartica{background:var(--svetla)}
+  .kartica h3{font-size:1.4rem;color:var(--primarna);margin-bottom:4px}
+  .kartica .leta{font-size:.85rem;font-weight:600;color:var(--siva);margin-bottom:10px}
+
+  /* Tabele */
+  .tabela{overflow-x:auto;border:1px solid var(--rob);border-radius:8px;background:var(--belo)}
+  table{width:100%;border-collapse:collapse;min-width:560px}
+  th,td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--rob);font-size:.95rem}
+  th{background:var(--temna);color:#fff;font-weight:600}
+  tr:last-child td{border-bottom:0}
+  .zmaga{color:#0b7a3e;font-weight:600}.poraz{color:#b3261e;font-weight:600}
+
+  /* Koraki vpisa */
+  .koraki{counter-reset:k;list-style:none;display:grid;gap:14px;max-width:760px}
+  .koraki li{counter-increment:k;position:relative;padding:16px 16px 16px 64px;background:var(--svetla);border-radius:8px}
+  .koraki li::before{content:counter(k);position:absolute;left:16px;top:14px;width:34px;height:34px;border-radius:50%;background:var(--primarna);color:#fff;display:grid;place-items:center;font-weight:700}
+
+  /* Vprašanja */
+  details{background:var(--belo);border:1px solid var(--rob);border-radius:8px;padding:16px 18px;margin-bottom:10px}
+  summary{font-weight:600;cursor:pointer}
+  details p{margin-top:10px;color:var(--siva)}
+
+  .zemljevid{width:100%;height:320px;border:0;border-radius:8px;margin-top:18px}
+  footer{background:var(--temna);color:#b9c6bf;padding:40px 0;font-size:.9rem}
+  footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px}
+  footer a{color:#fff}
+
+  @media (max-width:760px){
+    #menu-btn{display:block}
+    .nav ul{display:none;position:absolute;top:60px;left:0;right:0;background:var(--temna);flex-direction:column;gap:0;padding:8px 0}
+    .nav ul.odprt{display:flex}
+    .nav ul a{display:block;padding:12px 16px}
+    .hero{padding:60px 0}
+    section{padding:52px 0}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#" class="logo">RD <span>Škofljica</span></a>
+    <button id="menu-btn" aria-label="Meni">☰</button>
+    <ul id="meni">
+      <li><a href="#o-klubu">O klubu</a></li>
+      <li><a href="#selekcije">Selekcije</a></li>
+      <li><a href="#urnik">Urnik</a></li>
+      <li><a href="#tekme">Tekme</a></li>
+      <li><a href="#vpis">Vpis</a></li>
+      <li><a href="#kontakt">Kontakt</a></li>
+    </ul>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <h1>Rokomet v <span>Škofljici</span></h1>
+    <p>Treniramo, tekmujemo in se zabavamo. Vabimo dečke, deklice in odrasle, da se nam pridružijo, prvi trening je brezplačen.</p>
+    <a href="#vpis" class="btn btn-glavni">Pridi na prvi trening</a>
+    <a href="#urnik" class="btn btn-obroba">Urnik treningov</a>
+    <div class="hitro">
+      <div><b>Kje treniramo</b><span class="todo">Ime dvorane, naslov</span></div>
+      <div><b>Naslednja tekma</b><span class="todo">Datum, nasprotnik</span></div>
+      <div><b>Kontakt</b><span class="todo">041 000 000</span></div>
+    </div>
+  </div>
+</div>
+
+<section id="o-klubu">
+  <div class="wrap">
+    <h2>O klubu</h2>
+    <p class="uvod">Rokometno društvo Škofljica <span class="todo">je bilo ustanovljeno leta XXXX</span>. Naš cilj je otrokom in mladim ponuditi kakovostno vadbo, razvijati rokometne talente in povezovati lokalno skupnost.</p>
+    <div class="mreza">
+      <div class="kartica"><h3>Strokovni trenerji</h3><p>Vadbo vodijo usposobljeni trenerji, ki delo prilagodijo starosti in znanju igralcev.</p></div>
+      <div class="kartica"><h3>Za vse starosti</h3><p>Od najmlajših, ki se z žogo šele spoznavajo, do članske ekipe, ki tekmuje v ligi.</p></div>
+      <div class="kartica"><h3>Več kot šport</h3><p>Turnirji, priprave, druženja in klubski dogodki. Pri nas se sklepajo prijateljstva za vse življenje.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="selekcije">
+  <div class="wrap">
+    <h2>Selekcije</h2>
+    <p class="uvod">Poišči skupino glede na letnico rojstva. Če nisi prepričan, kam spadaš, nas pokliči in ti svetujemo.</p>
+    <div class="mreza">
+      <div class="kartica"><h3>Mini rokomet</h3><div class="leta todo">letnik 20XX in mlajši</div><p>Igrive vadbe, osnove gibanja in prvi stik z žogo.</p><p><b>Trener:</b> <span class="todo">Ime Priimek</span></p></div>
+      <div class="kartica"><h3>Mlajši dečki</h3><div class="leta todo">letnika 20XX–20XX</div><p>Osnovne rokometne tehnike in prvi turnirji.</p><p><b>Trener:</b> <span class="todo">Ime Priimek</span></p></div>
+      <div class="kartica"><h3>Starejši dečki</h3><div class="leta todo">letnika 20XX–20XX</div><p>Tekmovanje v ligi, taktika in timska igra.</p><p><b>Trener:</b> <span class="todo">Ime Priimek</span></p></div>
+      <div class="kartica"><h3>Kadeti in mladinci</h3><div class="leta todo">letnika 20XX–20XX</div><p>Resnejši treningi, kondicijska priprava in državna tekmovanja.</p><p><b>Trener:</b> <span class="todo">Ime Priimek</span></p></div>
+      <div class="kartica"><h3>Člani</h3><div class="leta">18+</div><p>Članska ekipa, ki tekmuje v <span class="todo">ime lige</span>.</p><p><b>Trener:</b> <span class="todo">Ime Priimek</span></p></div>
+      <div class="kartica"><h3>Rekreacija</h3><div class="leta">odrasli</div><p>Za vse, ki želijo igrati rokomet za zabavo in kondicijo, brez tekmovanj.</p><p><b>Vodja:</b> <span class="todo">Ime Priimek</span></p></div>
+    </div>
+  </div>
+</section>
+
+<section id="urnik">
+  <div class="wrap">
+    <h2>Urnik treningov</h2>
+    <p class="uvod">Urnik velja za sezono 2026/27. Med šolskimi počitnicami se lahko spremeni, obvestila objavljamo spodaj pri novicah in na družbenih omrežjih.</p>
+    <div class="tabela">
+      <table>
+        <thead><tr><th>Selekcija</th><th>Ponedeljek</th><th>Torek</th><th>Sreda</th><th>Četrtek</th><th>Petek</th></tr></thead>
+        <tbody>
+          <tr><td><b>Mini rokomet</b></td><td class="todo">16:00–17:00</td><td>–</td><td class="todo">16:00–17:00</td><td>–</td><td>–</td></tr>
+          <tr><td><b>Mlajši dečki</b></td><td>–</td><td class="todo">16:30–18:00</td><td>–</td><td class="todo">16:30–18:00</td><td>–</td></tr>
+          <tr><td><b>Starejši dečki</b></td><td class="todo">17:00–18:30</td><td>–</td><td class="todo">17:00–18:30</td><td>–</td><td class="todo">16:30–18:00</td></tr>
+          <tr><td><b>Kadeti in mladinci</b></td><td>–</td><td class="todo">18:00–19:30</td><td>–</td><td class="todo">18:00–19:30</td><td class="todo">18:00–19:30</td></tr>
+          <tr><td><b>Člani</b></td><td class="todo">19:30–21:00</td><td>–</td><td class="todo">19:30–21:00</td><td>–</td><td class="todo">19:30–21:00</td></tr>
+          <tr><td><b>Rekreacija</b></td><td>–</td><td class="todo">20:00–21:30</td><td>–</td><td>–</td><td>–</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:12px;color:var(--siva);font-size:.9rem">Lokacija: <span class="todo">Ime dvorane, ulica in hišna številka, Škofljica</span></p>
+  </div>
+</section>
+
+<section id="tekme">
+  <div class="wrap">
+    <h2>Tekme</h2>
+    <p class="uvod">Pridi navijat! Domače tekme so odprte za vse obiskovalce.</p>
+    <h3 style="margin-bottom:10px">Prihodnje tekme</h3>
+    <div class="tabela" style="margin-bottom:30px">
+      <table>
+        <thead><tr><th>Datum</th><th>Ura</th><th>Ekipa</th><th>Tekma</th><th>Kraj</th></tr></thead>
+        <tbody>
+          <tr><td class="todo">sob, 7. 11.</td><td class="todo">18:00</td><td>Člani</td><td class="todo">RD Škofljica – Nasprotnik</td><td>doma</td></tr>
+          <tr><td class="todo">ned, 8. 11.</td><td class="todo">10:00</td><td>Starejši dečki</td><td class="todo">Nasprotnik – RD Škofljica</td><td>gosti</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h3 style="margin-bottom:10px">Zadnji rezultati</h3>
+    <div class="tabela">
+      <table>
+        <thead><tr><th>Datum</th><th>Ekipa</th><th>Tekma</th><th>Rezultat</th></tr></thead>
+        <tbody>
+          <tr><td class="todo">24. 10.</td><td>Člani</td><td class="todo">RD Škofljica – Nasprotnik</td><td class="zmaga todo">30:27</td></tr>
+          <tr><td class="todo">18. 10.</td><td>Kadeti</td><td class="todo">Nasprotnik – RD Škofljica</td><td class="poraz todo">25:22</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:12px;color:var(--siva);font-size:.9rem">Celotne lestvice in razpored so na strani <a href="https://www.rokometna-zveza.si" target="_blank" rel="noopener">Rokometne zveze Slovenije</a>.</p>
+  </div>
+</section>
+
+<section id="vpis">
+  <div class="wrap">
+    <h2>Vpis novih članov</h2>
+    <p class="uvod">Vpis poteka vse leto. Predznanje ni potrebno, samo dobra volja.</p>
+    <ol class="koraki">
+      <li><b>Pokliči ali piši trenerju</b> in povej, koliko je otrok star. Svetovali ti bomo, v katero skupino spada.</li>
+      <li><b>Pridi na brezplačen poskusni trening.</b> S seboj prinesi športna oblačila, čiste športne copate za dvorano in plastenko vode.</li>
+      <li><b>Izpolni pristopno izjavo</b>, ki jo dobiš pri trenerju.</li>
+      <li><b>Uredi zdravniški pregled</b> za športnike (potreben za registracijo in tekmovanja).</li>
+      <li><b>Poravnaj članarino</b> in že si del ekipe!</li>
+    </ol>
+    <div class="mreza" style="margin-top:30px">
+      <div class="kartica"><h3>Članarina</h3><p><span class="todo">XX € na mesec</span> ali <span class="todo">XXX € na sezono</span>. Za brate in sestre nudimo popust.</p></div>
+      <div class="kartica"><h3>Oprema</h3><p>Za začetek zadostujejo športna oblačila in copati. Klubski dres dobiš ob registraciji za tekmovanja.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="vprasanja">
+  <div class="wrap">
+    <h2>Pogosta vprašanja</h2>
+    <p class="uvod">Odgovori na vprašanja, ki jih starši in novi igralci najpogosteje postavijo.</p>
+    <details><summary>Pri kateri starosti lahko otrok začne?</summary><p>Mini rokomet je primeren že za otroke od <span class="todo">X</span> leta naprej. Pomembno je, da otrok rad teče in se igra z žogo.</p></details>
+    <details><summary>Ali mora otrok že znati igrati rokomet?</summary><p>Ne. Večina otrok začne brez predznanja, trenerji pa vadbo prilagodijo začetnikom.</p></details>
+    <details><summary>Lahko pridejo tudi deklice?</summary><p>Seveda. <span class="todo">Deklice v mlajših selekcijah trenirajo skupaj z dečki / imamo ločeno žensko ekipo.</span></p></details>
+    <details><summary>Kaj, če trening zamudimo zaradi drugih obveznosti?</summary><p>Ni težav. Javite trenerju, otrok lahko po dogovoru pride tudi na trening druge skupine.</p></details>
+    <details><summary>Ali lahko starši gledajo trening?</summary><p><span class="todo">Da, starši so dobrodošli na tribuni.</span></p></details>
+    <details><summary>Kako izvem za spremembe urnika?</summary><p>Spremembe objavimo na tej strani in na naših družbenih omrežjih, trenerji pa obvestijo tudi starše v skupinskem klepetu.</p></details>
+  </div>
+</section>
+
+<section id="kontakt">
+  <div class="wrap">
+    <h2>Kontakt in lokacija</h2>
+    <p class="uvod">Za vsa vprašanja nas pokliči ali piši, rade volje odgovorimo.</p>
+    <div class="mreza">
+      <div class="kartica"><h3>Klub</h3><p>Rokometno društvo Škofljica<br><span class="todo">Ulica in hišna številka</span><br>1291 Škofljica</p></div>
+      <div class="kartica"><h3>Pokliči ali piši</h3><p>Telefon: <span class="todo">041 000 000</span><br>E-pošta: <span class="todo">info@rd-skofljica.si</span></p></div>
+      <div class="kartica"><h3>Sledi nam</h3><p><a href="#" class="todo">Instagram</a><br><a href="#" class="todo">Facebook</a></p></div>
+    </div>
+    <iframe class="zemljevid" title="Zemljevid Škofljica" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=14.555%2C45.975%2C14.595%2C45.995&amp;layer=mapnik"></iframe>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>© 2026 Rokometno društvo Škofljica</div>
+    <div><a href="#o-klubu">O klubu</a> · <a href="#urnik">Urnik</a> · <a href="#vpis">Vpis</a> · <a href="#kontakt">Kontakt</a></div>
+  </div>
+</footer>
+
+<script>
+  const btn=document.getElementById('menu-btn'),meni=document.getElementById('meni');
+  btn.addEventListener('click',()=>meni.classList.toggle('odprt'));
+  meni.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>meni.classList.remove('odprt')));
+</script>
+</body>
+</html>
